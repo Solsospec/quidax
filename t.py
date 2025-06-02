@@ -62,9 +62,10 @@ def qdx():
 	
 
 def fill(count, diff, period):
+	alert = f"{count}\n{diff}\n{period}"
 	with open("difference.txt", "w") as file:
-		file.write(f"{count}\n{diff}\n{period}")
-	bot(file)
+		file.write(alert)
+	bot(alert)
 		
 
 def rec():
