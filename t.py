@@ -7,7 +7,7 @@ def main():
 	count = 1
 	counter = 1
 	thresh = 50.00001
-	desire = 249.99999
+	desire = -100
 	multiplier = 0.99945
 	
 	while True:
