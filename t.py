@@ -7,7 +7,7 @@ def main():
 	count = 1
 	counter = 1
 	thresh = 50.00001
-	desire = -100
+	desire = 249.99999
 	multiplier = 0.99945
 	
 	while True:
@@ -31,13 +31,11 @@ def main():
 					d = float(lines[1])
 							
 					if d > diff:
-						diff = d
-						period = lines[2]
+						pass
 								
 					else:
 						period = rec()
-			
-					fill(count, diff, period)
+						fill(count, diff, period)
 
 				count += 1
 		
@@ -66,11 +64,29 @@ def qdx():
 def fill(count, diff, period):
 	with open("difference.txt", "w") as file:
 		file.write(f"{count}\n{diff}\n{period}")
+	bot(file)
 		
 
 def rec():
 	current_time = datetime.datetime.now(pytz.timezone('Africa/Lagos')).strftime('%Y-%m-%d %H:%M:%S')
 	return current_time
+	
+	
+def bot(message):
+	BOT_TOKEN = '7977634075:AAEXNPYr2YMdJvmNUQFBOc1c_YWNdl1NOYs'
+	CHAT_ID = '1090646144'
+
+	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+	payload = {
+		'chat_id': CHAT_ID,
+		'text': f"📢 Price Alert:\n{message}"
+	}
+
+	try:
+		response = requests.post(url, data=payload)
+		response.raise_for_status()
+	except Exception as e:
+		pass
 	
 
 if __name__ == "__main__":
