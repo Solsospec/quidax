@@ -1,5 +1,3 @@
 requests
 datetime
 pytz
-smtplib
-email
