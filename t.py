@@ -91,7 +91,7 @@ def bot(message):
 	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 	payload = {
 		'chat_id': CHAT_ID,
-		'text': f"📢 **PRICE ALERT:**\n\n{message}"
+		'text': f"📢 *PRICE ALERT:*\n\n{message}"
 	}
 
 	try:
