@@ -32,7 +32,7 @@ def main():
 			diff = c_2 - q
 			c_q = c_2 / q
 		
-			if c < thresh and c_q > 0.9955:
+			if c < thresh and c_q > 0.955:
 				period = rec()
 				if count == 1:
 					fill(count, diff, period, c_2, c_q)
@@ -92,6 +92,7 @@ def bot(message):
 	payload = {
 		'chat_id': CHAT_ID,
 		'text': f"📢 *PRICE ALERT:*\n\n{message}"
+		'parse_mode': 'MarkdownV2'
 	}
 
 	try:
