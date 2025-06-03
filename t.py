@@ -32,7 +32,7 @@ def main():
 			diff = c_2 - q
 			c_q = c_2 / q
 		
-			if c < thresh and c_q > 0.9955:
+			if c < thresh and c_q > fees:
 				period = rec()
 				if count == 1:
 					fill(count, diff, period, c_2, c_q)
@@ -91,7 +91,7 @@ def bot(message):
 	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 	payload = {
 		'chat_id': CHAT_ID,
-		'text': f"📢 PRICE ALERT\n\n{message}"
+		'text': f"📢 PRICE ALERT!\n\n{message}"
 	}
 
 	try:
