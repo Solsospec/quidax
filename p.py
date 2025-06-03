@@ -10,15 +10,15 @@ def main():
 	thresh = 50.00001
 	multiplier = 0.99925
 	
-	sell = 162.21
-	buy = 161.39
+	sell = 105768
+	buy = 105694
 	step = 0.00005
 	
 	calc = (1 / math.pow(0.999, 2)) * (math.sqrt(sell / buy))
 	
 	fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
 
-	coin = "SOL"
+	coin = "BTC"
 	
 	while True:
 		state = "   YES!" if count > 1 else ""
@@ -38,7 +38,7 @@ def main():
 					fill(count, diff, period, c_2, c_q)
 										
 				else:
-					with open("difference.txt", "r") as file:
+					with open("differences.txt", "r") as file:
 						lines = file.readlines()
 					cq = float(lines[4].split(" ")[-1])
 							
@@ -74,7 +74,7 @@ def qdx(coin):
 
 def fill(count, diff, period, cbs, ratio):
 	alert = f"Occurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nRatio: {ratio}"
-	with open("difference.txt", "w") as file:
+	with open("differences.txt", "w") as file:
 		file.write(alert)
 	bot(alert)
 		
