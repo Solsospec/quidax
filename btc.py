@@ -10,7 +10,7 @@ def main():
 	thresh = 50.00001
 	multiplier = 0.99925
 	
-	sell = 1
+	sell = 105768
 	buy = 105694
 	step = 0.00005
 	
