@@ -34,7 +34,7 @@ def main():
 			
 			counter += 1
 		
-			if c < thresh and c_q > 0.9955:
+			if c < thresh and c_q > fees:
 				bot(count, diff, rec(), c_2, c_q)
 				count += 1
 		
