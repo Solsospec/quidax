@@ -63,7 +63,7 @@ def rec():
 	
 	
 def bot(count, diff, period, cbs, ratio):
-	BOT_TOKEN = '7977634075:AAEXNPYr2YMdJvmNUQFBOc1c_YWNdl1NOYs'
+	BOT_TOKEN = '7743900681:AAFtpcFEtng9sbAUuxh2JimmajuxTLou08g'
 	CHAT_ID = '1090646144'
 
 	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
