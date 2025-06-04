@@ -31,6 +31,8 @@ def main():
 			c = c_1 - c_2
 			diff = c_2 - q
 			c_q = c_2 / q
+			
+			counter += 1
 		
 			if c < thresh and c_q > fees:
 				bot(count, diff, rec(), c_2, c_q)
@@ -38,9 +40,6 @@ def main():
 		
 		except Exception as e:
 			print(f"\nAn error occurred: {e}\n")
-			continue
-			
-		counter += 1
 
 
 def coinbase(multiplier, coin):
