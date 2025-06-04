@@ -33,21 +33,7 @@ def main():
 			c_q = c_2 / q
 		
 			if c < thresh and c_q > fees:
-				period = rec()
-				if count == 1:
-					fill(count, diff, period, c_2, c_q)
-										
-				else:
-					with open("differences.txt", "r") as file:
-						lines = file.readlines()
-					cq = float(lines[4].split(" ")[-1])
-							
-					if cq > c_q:
-						pass
-								
-					else:
-						fill(count, diff, period, c_2, c_q)
-
+				bot(count, diff, rec(), c_2, c_q)
 				count += 1
 		
 		except Exception as e:
@@ -70,13 +56,6 @@ def qdx(coin):
 	response = requests.get(url, timeout=0.5)
 	order = response.json()["data"]["asks"][0]["price"]
 	return float(order)
-	
-
-def fill(count, diff, period, cbs, ratio):
-	alert = f"Occurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nRatio: {ratio}"
-	with open("differences.txt", "w") as file:
-		file.write(alert)
-	bot(alert)
 		
 
 def rec():
@@ -84,14 +63,14 @@ def rec():
 	return current_time
 	
 	
-def bot(message):
+def bot(count, diff, period, cbs, ratio):
 	BOT_TOKEN = '7977634075:AAEXNPYr2YMdJvmNUQFBOc1c_YWNdl1NOYs'
 	CHAT_ID = '1090646144'
 
 	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 	payload = {
 		'chat_id': CHAT_ID,
-		'text': f"📢 PRICE ALERT!\n\n{message}"
+		'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nRatio: {ratio}"
 	}
 
 	try:
