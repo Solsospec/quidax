@@ -35,7 +35,7 @@ def main():
 			counter += 1
 		
 			if c < thresh and c_q > fees:
-				bot(count, diff, rec(), c_2, c_q)
+				bot(count, diff, rec(), c_2, q, c_q)
 				count += 1
 		
 		except Exception as e:
@@ -62,7 +62,7 @@ def rec():
 	return current_time
 	
 	
-def bot(count, diff, period, cbs, ratio):
+def bot(count, diff, period, cbs, q, ratio):
 	BOT_TOKEN = '7743900681:AAFtpcFEtng9sbAUuxh2JimmajuxTLou08g'
 	CHAT_ID = '1090646144'
 
