@@ -69,7 +69,7 @@ def bot(count, diff, period, cbs, q, ratio):
 	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 	payload = {
 		'chat_id': CHAT_ID,
-		'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nRatio: {ratio}"
+		'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nRatio: {ratio}"
 	}
 
 	try:
