@@ -35,7 +35,7 @@ def main():
 			counter += 1
 		
 			if c < thresh and c_q > fees:
-				bot(count, diff, rec(), c_2, c_q)
+				bot(count, diff, rec(), c_2, qdx, c_q)
 				count += 1
 		
 		except Exception as e:
@@ -62,14 +62,14 @@ def rec():
 	return current_time
 	
 	
-def bot(count, diff, period, cbs, ratio):
+def bot(count, diff, period, cbs, qdx, ratio):
 	BOT_TOKEN = '7977634075:AAEXNPYr2YMdJvmNUQFBOc1c_YWNdl1NOYs'
 	CHAT_ID = '1090646144'
 
 	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 	payload = {
 		'chat_id': CHAT_ID,
-		'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nRatio: {ratio}"
+		'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {qdx}\nRatio: {ratio}"
 	}
 
 	try:
