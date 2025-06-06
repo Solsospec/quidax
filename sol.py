@@ -82,7 +82,7 @@ def bot(*args):
 		count, diff, period, cbs, q, gain = args
 		payload = {
 			'chat_id': CHAT_ID,
-			'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nGain: gain}"
+			'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nGain: {gain}"
 		}
 		
 	else:
