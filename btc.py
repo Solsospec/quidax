@@ -9,7 +9,7 @@ def main():
 	count = 0
 	counter = 1
 	thresh = 50.00001
-	multiplier = 0.99925
+	multiplier = 0.99955
 	
 	sell = 105768
 	buy = 105694
@@ -39,11 +39,12 @@ def main():
 			c = c_1 - c_2
 			diff = c_2 - q
 			c_q = c_2 / q
+			gain = c_q / fees
 			
 			counter += 1
 		
-			if c < thresh and c_q > fees:
-				bot(count, diff, rec(), c_2, q, c_q)
+			if c < thresh and gain > 1:
+				bot(count, diff, rec(), c_2, q, gain)
 				count += 1
 		
 		except Exception as e:
@@ -78,10 +79,10 @@ def bot(*args):
 	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 	
 	if args:
-		count, diff, period, cbs, q, ratio = args
+		count, diff, period, cbs, q, gain = args
 		payload = {
 			'chat_id': CHAT_ID,
-			'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nRatio: {ratio}"
+			'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nGain: {gain}"
 		}
 		
 	else:
