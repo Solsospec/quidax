@@ -2,6 +2,7 @@ import requests
 import datetime
 import pytz
 import math
+from time import time
 
 
 def main():
@@ -19,10 +20,16 @@ def main():
 	fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
 
 	coin = "BTC"
+	last_day = get_day_number()
 	
 	while True:
 		state = "   YES!" if count > 1 else ""
 		print(f"Running... {counter}{state}")
+		
+		current_day = get_day_number()
+		if current_day > last_day:
+			bot()
+			last_day = current_day
 
 		try:
 			c_1 = coinbase(multiplier, coin)
@@ -33,6 +40,7 @@ def main():
 			c_q = c_2 / q
 			
 			counter += 1
+			day = day()
 		
 			if c < thresh and c_q > fees:
 				bot(count, diff, rec(), c_2, q, c_q)
@@ -62,22 +70,36 @@ def rec():
 	return current_time
 	
 	
-def bot(count, diff, period, cbs, q, ratio):
+def bot(*args):
 	BOT_TOKEN = '7977634075:AAEXNPYr2YMdJvmNUQFBOc1c_YWNdl1NOYs'
 	CHAT_ID = '1090646144'
 
 	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-	payload = {
-		'chat_id': CHAT_ID,
-		'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nRatio: {ratio}"
-	}
+	
+	if args:
+		count, diff, period, cbs, q, ratio = args
+		payload = {
+			'chat_id': CHAT_ID,
+			'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nRatio: {ratio}"
+		}
+		
+	else:
+		hyph = "-" * 30
+		payload = {
+			'chat_id': CHAT_ID,
+			'text': f"{hyph}\n{' ' * 17}NEW DAY!!!\n{hyph}"
+		}
 
 	try:
 		response = requests.post(url, data=payload)
 		response.raise_for_status()
 	except Exception as e:
 		pass
-	
+
+
+def get_day_number():
+	return (time() + 3600) // 86400
+
 
 if __name__ == "__main__":
 	main()
