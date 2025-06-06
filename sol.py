@@ -6,7 +6,7 @@ from time import time
 
 
 def main():
-	count = 1
+	count = 0
 	counter = 1
 	thresh = 50.00001
 	multiplier = 0.99925
@@ -28,6 +28,7 @@ def main():
 		
 		current_day = get_day_number()
 		if current_day > last_day:
+			count = counter = 0
 			bot()
 			last_day = current_day
 
@@ -47,6 +48,7 @@ def main():
 		
 		except Exception as e:
 			print(f"\nAn error occurred: {e}\n")
+			counter = 1 if not counter else counter
 
 
 def coinbase(multiplier, coin):
