@@ -40,7 +40,6 @@ def main():
 			c_q = c_2 / q
 			
 			counter += 1
-			day = day()
 		
 			if c < thresh and c_q > fees:
 				bot(count, diff, rec(), c_2, q, c_q)
