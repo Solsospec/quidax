@@ -6,8 +6,7 @@ from time import time
 
 
 def main():
-	count = 0
-	counter = 1
+	count = counter = 1
 	thresh = 50.00001
 	multiplier = 0.99955
 	
@@ -28,7 +27,8 @@ def main():
 		
 		current_day = get_day_number()
 		if current_day > last_day:
-			count = counter = 0
+			count = 1
+			counter = 0
 			bot()
 			last_day = current_day
 
@@ -44,8 +44,8 @@ def main():
 			counter += 1
 		
 			if c < thresh and gain > 1:
-				count += 1
 				bot(count, diff, rec(), c_2, q, gain)
+				count += 1
 		
 		except Exception as e:
 			print(f"\nAn error occurred: {e}\n")
