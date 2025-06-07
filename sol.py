@@ -17,7 +17,6 @@ def main():
 	calc = (1 / math.pow(0.999, 2)) * (math.sqrt(sell / buy))
 	
 	fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
-	fees = 0.9975
 
 	coin = "SOL"
 	last_day = get_day_number()
