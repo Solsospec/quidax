@@ -44,8 +44,8 @@ def main():
 			counter += 1
 		
 			if c < thresh and gain > 1:
-				bot(count, diff, rec(), c_2, q, gain)
 				count += 1
+				bot(count, diff, rec(), c_2, q, gain)
 		
 		except Exception as e:
 			print(f"\nAn error occurred: {e}\n")
