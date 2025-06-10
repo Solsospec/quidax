@@ -2,14 +2,19 @@ import requests
 import datetime
 import pytz
 import math
-from time import time
+from time import sleep, time
 
 
 def main():
 	count = counter = 1
-	thresh = 80000.01
-	multiplier = 0.99955
-	converter = conversion()
+	multiplier = 0.99945
+	while True:
+		try:
+			converter = conversion()
+			break
+		except Exception as e:
+			print(f"Error: {e}\nRetrying the USDT/NGN converter...\n\n")
+			sleep(0.5)
 	
 	sell = 173222
 	buy = 172530
@@ -36,12 +41,15 @@ def main():
 
 		try:
 			converter = conversion() if counter % 600 == 0 else converter
+
 			c_1 = coinbase(multiplier, coin, converter)
-			q = qdx(coin, converter)
+			q = qdx(coin)
 			c_2 = coinbase(multiplier, coin, converter)
+			
 			c = c_1 - c_2
 			diff = c_2 - q
 			c_q = c_2 / q
+			thresh = c_2 * 0.0005 
 			gain = c_q / fees
 			
 			counter += 1
@@ -63,22 +71,16 @@ def coinbase(multiplier, coin, converter):
 	return price
 
 
-def qdx(coin, converter):
-	return quidax(coin) * converter
-
-
-def conversion():
-	return quidax() / 1.0012
-	
-	
-def quidax(coin="ngn"):
-	pair = "usdtngn" if coin == "ngn" else f"{coin.lower()}usdt"
-		
-	url = f"https://www.quidax.com/api/v1/markets/{pair}/order_book"
+def qdx(coin="usdt"):
+	url = f"https://www.quidax.com/api/v1/markets/{coin.lower()}ngn/order_book"
 	response = requests.get(url, timeout=0.5)
 	order = response.json()["data"]["asks"][0]["price"]
 	return float(order)
-		
+
+
+def conversion():
+	return qdx() / 1.0012
+
 
 def rec():
 	current_time = datetime.datetime.now(pytz.timezone('Africa/Lagos')).strftime('%Y-%m-%d %H:%M:%S')
