@@ -1,7 +1,7 @@
 import requests
 import time
 
-n = 1
+n = 1000
 
 # Kucoin
 a_b = 0
@@ -18,10 +18,6 @@ okx_price = 0
 # MEXC
 i_j = 0
 mexc_price = 0
-
-# Gate
-k_l = 0
-gate_price = 0
 
 # HTX (Huobi)
 m_n = 0
@@ -73,15 +69,6 @@ for i in range(n):
     mexc_price += mexc_val
     i_j += j
 
-    # Gate.io
-    k = time.time()
-    gate_url = "https://api.gateio.ws/api/v4/spot/tickers?currency_pair=AAVE_USDT"
-    gate_resp = requests.get(gate_url).json()
-    gate_val = float(gate_resp[0]["last"])
-    l = time.time() - k
-    gate_price += gate_val
-    k_l += l
-
     # HTX (Huobi)
     m = time.time()
     htx_url = "https://api.huobi.pro/market/detail/merged?symbol=aaveusdt"
@@ -122,9 +109,6 @@ okx_avg_latency = e_f / n
 mexc_avg_price = mexc_price / n
 mexc_avg_latency = i_j / n
 
-gate_avg_price = gate_price / n
-gate_avg_latency = k_l / n
-
 htx_avg_price = htx_price / n
 htx_avg_latency = m_n / n
 
@@ -139,7 +123,6 @@ print(f"Kucoin: {kucoin_avg_price} -- {kucoin_avg_latency}\n")
 print(f"Coinbase: {coinbase_avg_price} -- {coinbase_avg_latency}\n")
 print(f"OKX: {okx_avg_price} -- {okx_avg_latency}\n")
 print(f"MEXC: {mexc_avg_price} -- {mexc_avg_latency}\n")
-print(f"Gate.io: {gate_avg_price} -- {gate_avg_latency}\n")
 print(f"HTX: {htx_avg_price} -- {htx_avg_latency}\n")
 print(f"Binance: {binance_avg_price} -- {binance_avg_latency}\n")
 print(f"Bybit: {bybit_avg_price} -- {bybit_avg_latency}\n")
@@ -147,7 +130,6 @@ print(f"Bybit: {bybit_avg_price} -- {bybit_avg_latency}\n")
 print(f"\nKucoin/Coinbase Latency Ratio: {kucoin_avg_latency / coinbase_avg_latency}")
 print(f"OKX/Coinbase Latency Ratio: {okx_avg_latency / coinbase_avg_latency}")
 print(f"MEXC/Coinbase Latency Ratio: {mexc_avg_latency / coinbase_avg_latency}")
-print(f"Gate.io/Coinbase Latency Ratio: {gate_avg_latency / coinbase_avg_latency}")
 print(f"HTX/Coinbase Latency Ratio: {htx_avg_latency / coinbase_avg_latency}")
 print(f"Binance/Coinbase Latency Ratio: {binance_avg_latency / coinbase_avg_latency}")
 print(f"Bybit/Coinbase Latency Ratio: {bybit_avg_latency / coinbase_avg_latency}")
