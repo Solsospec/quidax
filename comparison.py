@@ -43,7 +43,7 @@ for i in range(n):
 
     # Coinbase
     c = time.time()
-    url = "https://api.coinbase.com/v2/prices/NGN-USDT/spot"
+    url = "https://api.coinbase.com/v2/prices/AAVE-USDT/spot"
     response = requests.get(url)
     data = response.json()["data"]["amount"]
     price = float(data)
@@ -53,7 +53,7 @@ for i in range(n):
 
     # OKX
     e = time.time()
-    okx_url = "https://www.okx.com/api/v5/market/ticker?instId=AAVE-USDT"
+    okx_url = "https://www.okx.com/api/v5/market/ticker?instId=NGN-USDT"
     okx_resp = requests.get(okx_url).json()
     okx_val = float(okx_resp["data"][0]["last"])
     f = time.time() - e
