@@ -53,7 +53,7 @@ def main():
 			
 			counter += 1
 		
-			if c < thresh and gain > 0.99:
+			if c < thresh and gain > 0:
 				bot(count, diff, rec(), c_2, q, gain)
 				count += 1
 		
