@@ -70,15 +70,24 @@ def coinbase(coin, converter):
 	return price
 
 
-def qdx(coin="usdt"):
+def quidax(coin="usdt"):
 	url = f"https://www.quidax.com/api/v1/markets/{coin.lower()}ngn/order_book"
 	response = requests.get(url, timeout=0.5)
-	order = response.json()["data"]["asks"][0]["price"]
-	return float(order)
+	order_book = response.json()["data"]
+	return order_book
 
+
+def qdx(coin):
+	return float(quidax(coin)["asks"][0]["price"])
+	
 
 def conversion():
-	return qdx() / 1.0012
+	data = quidax()
+	ask = float(data["asks"][0]["price"])
+	bids = data["bids"]
+	bid = float(bids[0]["price"])
+	bid = float(bids[1]["price"]) if bid == 1600 else bid
+	return math.sqrt(ask * bid)
 
 
 def rec():
