@@ -62,7 +62,7 @@ for i in range(n):
 
     # MEXC
     i1 = time.time()
-    mexc_url = "https://api.mexc.com/api/v3/ticker/price?symbol=NGNUSDT"
+    mexc_url = "https://api.mexc.com/api/v3/ticker/price?symbol=AAVEUSDT"
     mexc_resp = requests.get(mexc_url).json()
     mexc_val = float(mexc_resp["price"])
     j = time.time() - i1
@@ -71,7 +71,7 @@ for i in range(n):
 
     # HTX (Huobi)
     m = time.time()
-    htx_url = "https://api.huobi.pro/market/detail/merged?symbol=aaveusdt"
+    htx_url = "https://api.huobi.pro/market/detail/merged?symbol=ngnusdt"
     htx_resp = requests.get(htx_url).json()
     htx_val = float(htx_resp["tick"]["close"])
     n1 = time.time() - m
