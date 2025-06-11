@@ -89,7 +89,7 @@ for i in range(n):
 
     # Bybit
     q = time.time()
-    bybit_url = "https://api.bybit.com/v5/market/tickers?category=spot&symbol=ngnUSDT"
+    bybit_url = "https://api.bybit.com/v5/market/tickers?category=spot&symbol=NGNUSDT"
     bybit_resp = requests.get(bybit_url).json()
     bybit_val = float(bybit_resp["result"]["list"][0]["lastPrice"])
     r = time.time() - q
