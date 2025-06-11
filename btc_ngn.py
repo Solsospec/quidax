@@ -63,7 +63,7 @@ def main():
 
 
 def coinbase(coin, converter):
-	url = f"https://api.coinbase.com/v2/prices/{coin}-USDC/spot"
+	url = f"https://api.coinbase.com/v2/prices/{coin}-USDT/spot"
 	response = requests.get(url, timeout=0.3)
 	data = response.json()["data"]["amount"]
 	price = float(data) * converter
