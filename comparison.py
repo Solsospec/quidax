@@ -53,7 +53,7 @@ for i in range(n):
 
     # OKX
     e = time.time()
-    okx_url = "https://www.okx.com/api/v5/market/ticker?instId=NGN-USDT"
+    okx_url = "https://www.okx.com/api/v5/market/ticker?instId=AAVE-USDT"
     okx_resp = requests.get(okx_url).json()
     okx_val = float(okx_resp["data"][0]["last"])
     f = time.time() - e
@@ -62,7 +62,7 @@ for i in range(n):
 
     # MEXC
     i1 = time.time()
-    mexc_url = "https://api.mexc.com/api/v3/ticker/price?symbol=AAVEUSDT"
+    mexc_url = "https://api.mexc.com/api/v3/ticker/price?symbol=NGNUSDT"
     mexc_resp = requests.get(mexc_url).json()
     mexc_val = float(mexc_resp["price"])
     j = time.time() - i1
