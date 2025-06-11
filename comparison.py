@@ -1,7 +1,7 @@
 import requests
 import time
 
-n = 1000
+n = 100
 
 # Kucoin
 a_b = 0
