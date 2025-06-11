@@ -7,7 +7,6 @@ from time import time
 
 def main():
 	count = counter = 1
-	multiplier = 0.99965
 	
 	sell = 307.4467
 	buy = 306.2193
@@ -33,9 +32,9 @@ def main():
 			last_day = current_day
 
 		try:
-			c_1 = coinbase(multiplier, coin)
+			c_1 = coinbase(coin)
 			q = qdx(coin)
-			c_2 = coinbase(multiplier, coin)
+			c_2 = coinbase(coin)
 			
 			c = c_1 - c_2
 			diff = c_2 - q
@@ -54,11 +53,11 @@ def main():
 			counter = 1 if not counter else counter
 
 
-def coinbase(multiplier, coin):
-	url = f"https://api.coinbase.com/v2/prices/{coin}-USDC/spot"
+def coinbase(coin):
+	url = f"https://api.coinbase.com/v2/prices/{coin}-USDT/spot"
 	response = requests.get(url, timeout=0.3)
 	data = response.json()["data"]["amount"]
-	price = float(data) * multiplier
+	price = float(data)
 	return price
 
 
