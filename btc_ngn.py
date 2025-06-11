@@ -7,7 +7,6 @@ from time import sleep, time
 
 def main():
 	count = counter = 1
-	multiplier = 0.99945
 	while True:
 		try:
 			converter = conversion()
@@ -42,9 +41,9 @@ def main():
 		try:
 			converter = conversion() if counter % 600 == 0 else converter
 
-			c_1 = coinbase(multiplier, coin, converter)
+			c_1 = coinbase(coin, converter)
 			q = qdx(coin)
-			c_2 = coinbase(multiplier, coin, converter)
+			c_2 = coinbase(coin, converter)
 			
 			c = c_1 - c_2
 			diff = c_2 - q
@@ -63,11 +62,11 @@ def main():
 			counter = 1 if not counter else counter
 
 
-def coinbase(multiplier, coin, converter):
+def coinbase(coin, converter):
 	url = f"https://api.coinbase.com/v2/prices/{coin}-USDC/spot"
 	response = requests.get(url, timeout=0.3)
 	data = response.json()["data"]["amount"]
-	price = float(data) * multiplier * converter
+	price = float(data) * converter
 	return price
 
 
