@@ -34,7 +34,7 @@ bybit_price = 0
 for i in range(n):
     # Kucoin
     a = time.time()
-    ir = "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=AAVE-USDT"
+    ir = "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=NGN-USDT"
     r = requests.get(ir).json()["data"]["price"]
     ir = float(r)
     b = time.time() - a
@@ -89,7 +89,7 @@ for i in range(n):
 
     # Bybit
     q = time.time()
-    bybit_url = "https://api.bybit.com/v5/market/tickers?category=spot&symbol=NGNUSDT"
+    bybit_url = "https://api.bybit.com/v5/market/tickers?category=spot&symbol=AAVEUSDT"
     bybit_resp = requests.get(bybit_url).json()
     bybit_val = float(bybit_resp["result"]["list"][0]["lastPrice"])
     r = time.time() - q
