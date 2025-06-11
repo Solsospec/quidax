@@ -71,7 +71,7 @@ for i in range(n):
 
     # HTX (Huobi)
     m = time.time()
-    htx_url = "https://api.huobi.pro/market/detail/merged?symbol=ngnusdt"
+    htx_url = "https://api.huobi.pro/market/detail/merged?symbol=aaveusdt"
     htx_resp = requests.get(htx_url).json()
     htx_val = float(htx_resp["tick"]["close"])
     n1 = time.time() - m
@@ -80,7 +80,7 @@ for i in range(n):
 
     # Binance
     o = time.time()
-    binance_url = "https://api.binance.com/api/v3/ticker/price?symbol=AAVEUSDT"
+    binance_url = "https://api.binance.com/api/v3/ticker/price?symbol=NGNUSDT"
     binance_resp = requests.get(binance_url).json()
     binance_val = float(binance_resp["price"])
     p = time.time() - o
