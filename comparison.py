@@ -43,7 +43,7 @@ for i in range(n):
 
     # Coinbase
     c = time.time()
-    url = "https://api.coinbase.com/v2/prices/AAVE-USDT/spot"
+    url = "https://api.coinbase.com/v2/prices/NGN-USDT/spot"
     response = requests.get(url)
     data = response.json()["data"]["amount"]
     price = float(data)
@@ -89,7 +89,7 @@ for i in range(n):
 
     # Bybit
     q = time.time()
-    bybit_url = "https://api.bybit.com/v5/market/tickers?category=spot&symbol=NGNUSDT"
+    bybit_url = "https://api.bybit.com/v5/market/tickers?category=spot&symbol=AAVEUSDT"
     bybit_resp = requests.get(bybit_url).json()
     bybit_val = float(bybit_resp["result"]["list"][0]["lastPrice"])
     r = time.time() - q
