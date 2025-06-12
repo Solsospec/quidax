@@ -23,10 +23,6 @@ mexc_price = 0
 m_n = 0
 htx_price = 0
 
-# Binance
-o_p = 0
-binance_price = 0
-
 # Bybit
 q_r = 0
 bybit_price = 0
@@ -78,15 +74,6 @@ for i in range(n):
     htx_price += htx_val
     m_n += n1
 
-    # Binance
-    o = time.time()
-    binance_url = "https://api.binance.com/api/v3/ticker/price?symbol=AAVEUSDT"
-    binance_resp = requests.get(binance_url).json()
-    binance_val = float(binance_resp["price"])
-    p = time.time() - o
-    binance_price += binance_val
-    o_p += p
-
     # Bybit
     q = time.time()
     bybit_url = "https://api.bybit.com/v5/market/tickers?category=spot&symbol=AAVEUSDT"
@@ -112,9 +99,6 @@ mexc_avg_latency = i_j / n
 htx_avg_price = htx_price / n
 htx_avg_latency = m_n / n
 
-binance_avg_price = binance_price / n
-binance_avg_latency = o_p / n
-
 bybit_avg_price = bybit_price / n
 bybit_avg_latency = q_r / n
 
@@ -124,7 +108,6 @@ print(f"Coinbase: {coinbase_avg_price} -- {coinbase_avg_latency}\n")
 print(f"OKX: {okx_avg_price} -- {okx_avg_latency}\n")
 print(f"MEXC: {mexc_avg_price} -- {mexc_avg_latency}\n")
 print(f"HTX: {htx_avg_price} -- {htx_avg_latency}\n")
-print(f"Binance: {binance_avg_price} -- {binance_avg_latency}\n")
 print(f"Bybit: {bybit_avg_price} -- {bybit_avg_latency}\n")
 
 print(f"\nKucoin/Coinbase Latency Ratio: {kucoin_avg_latency / coinbase_avg_latency}")
