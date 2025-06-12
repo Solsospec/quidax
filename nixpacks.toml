@@ -4,3 +4,11 @@ aptPkgs = [
   "libcjson-dev",
   "build-essential"
 ]
+
+[phases.build]
+cmds = [
+  "gcc comparison.c -o comparison -lcurl -lcjson"
+]
+
+[start]
+cmd = "./comparison"
