@@ -43,7 +43,7 @@ for i in range(n):
 
     # Coinbase
     c = time.time()
-    url = "https://api.coinbase.com/v2/prices/NGN-USDT/spot"
+    url = "https://api.coinbase.com/v2/prices/AAVE-USDT/spot"
     response = requests.get(url)
     data = response.json()["data"]["amount"]
     price = float(data)
