@@ -1,0 +1,6 @@
+[phases.setup]
+aptPkgs = [
+  "libcurl4-openssl-dev",
+  "libcjson-dev",
+  "build-essential"
+]
