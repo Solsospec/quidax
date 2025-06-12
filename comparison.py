@@ -23,10 +23,6 @@ mexc_price = 0
 m_n = 0
 htx_price = 0
 
-# Bybit
-q_r = 0
-bybit_price = 0
-
 for i in range(n):
     # Kucoin
     a = time.time()
@@ -74,15 +70,6 @@ for i in range(n):
     htx_price += htx_val
     m_n += n1
 
-    # Bybit
-    q = time.time()
-    bybit_url = "https://api.bybit.com/v5/market/tickers?category=spot&symbol=AAVEUSDT"
-    bybit_resp = requests.get(bybit_url).json()
-    bybit_val = float(bybit_resp["result"]["list"][0]["lastPrice"])
-    r = time.time() - q
-    bybit_price += bybit_val
-    q_r += r
-
 # Compute averages
 kucoin_avg_price = i_r / n
 kucoin_avg_latency = a_b / n
@@ -99,20 +86,15 @@ mexc_avg_latency = i_j / n
 htx_avg_price = htx_price / n
 htx_avg_latency = m_n / n
 
-bybit_avg_price = bybit_price / n
-bybit_avg_latency = q_r / n
-
 # Print results
 print(f"Kucoin: {kucoin_avg_price} -- {kucoin_avg_latency}\n")
 print(f"Coinbase: {coinbase_avg_price} -- {coinbase_avg_latency}\n")
 print(f"OKX: {okx_avg_price} -- {okx_avg_latency}\n")
 print(f"MEXC: {mexc_avg_price} -- {mexc_avg_latency}\n")
 print(f"HTX: {htx_avg_price} -- {htx_avg_latency}\n")
-print(f"Bybit: {bybit_avg_price} -- {bybit_avg_latency}\n")
+
 
 print(f"\nKucoin/Coinbase Latency Ratio: {kucoin_avg_latency / coinbase_avg_latency}")
 print(f"OKX/Coinbase Latency Ratio: {okx_avg_latency / coinbase_avg_latency}")
 print(f"MEXC/Coinbase Latency Ratio: {mexc_avg_latency / coinbase_avg_latency}")
 print(f"HTX/Coinbase Latency Ratio: {htx_avg_latency / coinbase_avg_latency}")
-print(f"Binance/Coinbase Latency Ratio: {binance_avg_latency / coinbase_avg_latency}")
-print(f"Bybit/Coinbase Latency Ratio: {bybit_avg_latency / coinbase_avg_latency}")
