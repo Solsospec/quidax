@@ -1,5 +1,11 @@
 import threading
-import time
+from time import time, sleep
+import requests
+import datetime
+import pytz
+import math
+
+
 
 
 # Shared stop event
@@ -19,7 +25,7 @@ def app1():
     print("App 1 starting...")
     while not stop_event.is_set():
         print("App 1 working...")
-        time.sleep(1)
+        sleep(1)
         break  # Break after one iteration
     print("App 1 done.")
 
@@ -28,7 +34,7 @@ def app2():
     print("App 2 starting...")
     while not stop_event.is_set():
         print("App 2 working...")
-        time.sleep(1)
+        sleep(1)
         break
     print("App 2 done.")
 
@@ -37,7 +43,7 @@ def app3():
     print("App 3 starting...")
     while not stop_event.is_set():
         print("App 3 working...")
-        time.sleep(1)
+        sleep(1)
         break
     print("App 3 done.")
 
@@ -46,7 +52,7 @@ def app4():
     print("App 4 starting...")
     while not stop_event.is_set():
         print("App 4 working...")
-        time.sleep(1)
+        sleep(1)
         break
     print("App 4 done.")
 
@@ -63,7 +69,7 @@ def main_loop():
         app4()
         if stop_event.is_set(): break
         print("Loop cycle complete. Restarting...\n")
-        time.sleep(1)
+        sleep(1)
 
 
 if __name__ == "__main__":
