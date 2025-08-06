@@ -6,8 +6,6 @@ import pytz
 import math
 
 
-
-
 # Shared stop event
 stop_event = threading.Event()
 
