@@ -23,6 +23,7 @@ class Aave:
     def __init__(self):
         pass # Placeholder
         
+        
     def aave_main(self):
         	count = counter = 1
         	
@@ -125,6 +126,7 @@ class Btc:
     def __init__(self):
         pass
         
+        
     def self.btc_main(self):
         	count = counter = 1
         	thresh = 50.00001
@@ -222,13 +224,129 @@ class Btc:
         	return (time() + 3600) // 86400
 
 
-def app3():
-    print("App 3 starting...")
-    while not stop_event.is_set():
-        print("App 3 working...")
-        sleep(1)
-        break
-    print("App 3 done.")
+class Btc_ngn:
+    def __init__(self):
+        pass
+        
+        
+    def self.btc_ngn_main(self):
+        	count = counter = 1
+        	while True:
+        		try:
+        			converter = self.conversion()
+        			break
+        		except Exception as e:
+        			print(f"Error: {e}\nRetrying the USDT/NGN converter...\n\n")
+        			sleep(0.5)
+        	
+        	sell = 173222
+        	buy = 172530
+        	step = 0.00005
+        	
+        	calc = (1 / math.pow(0.999, 2)) * (math.sqrt(sell / buy))
+        	
+        	fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
+        
+        	coin = "BTC"
+        	last_day = self.get_day_number()
+        	
+        	while True:
+        		state = "   YES!" if count > 1 else ""
+        		print(f"Running... {counter}{state}")
+        		
+        		current_day = self.get_day_number()
+        		if current_day > last_day:
+        			count = 1
+        			counter = 0
+        			bot()
+        			last_day = current_day
+        
+        		try:
+        			converter = self.conversion() if counter % 600 == 0 else converter
+        
+        			c_1 = self.coinbase(coin, converter)
+        			q = self.qdx(coin)
+        			c_2 = self.coinbase(coin, converter)
+        			
+        			c = c_1 - c_2
+        			diff = c_2 - q
+        			c_q = c_2 / q
+        			thresh = c_2 * 0.0005 
+        			gain = c_q / fees
+        			
+        			counter += 1
+        		
+        			if c < thresh and gain > 1:
+        				self.bot(count, diff, rec(), c_2, q, gain)
+        				count += 1
+        		
+        		except Exception as e:
+        			print(f"\nAn error occurred: {e}\n")
+        			counter = 1 if not counter else counter
+        
+
+    def self.coinbase(self, coin, converter):
+        	url = f"https://api.coinbase.com/v2/prices/{coin}-USDT/spot"
+        	response = requests.get(url, timeout=0.3)
+        	data = response.json()["data"]["amount"]
+        	price = float(data) * converter
+        	return price
+        
+
+    def self.quidax(self, coin="usdt"):
+        	url = f"https://www.quidax.com/api/v1/markets/{coin.lower()}ngn/order_book"
+        	response = requests.get(url, timeout=0.5)
+        	order_book = response.json()["data"]
+        	return order_book
+    
+
+    def self.qdx(self, coin):
+        	return float(self.quidax(coin)["asks"][0]["price"])
+	
+
+    def self.conversion(self):
+        	data = self.quidax()
+        	ask = float(data["asks"][0]["price"])
+        	bids = data["bids"]
+        	bid = float(bids[0]["price"])
+        	bid = float(bids[1]["price"]) if bid == 1600 else bid
+        	return math.sqrt(ask * bid)
+        
+
+    def self.rec(self):
+        	current_time = datetime.datetime.now(pytz.timezone('Africa/Lagos')).strftime('%Y-%m-%d %H:%M:%S')
+        	return current_time
+        	
+	
+    def self.bot(self, *args):
+        	BOT_TOKEN = '8003135578:AAHufA9EPBwRgR9xEHlB2vyq4dhx8MxYoL8'
+        	CHAT_ID = '1090646144'
+        
+        	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+        	
+        	if args:
+        		count, diff, period, cbs, q, gain = args
+        		payload = {
+        			'chat_id': CHAT_ID,
+        			'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nGain: {gain}"
+        		}
+        		
+        	else:
+        		hyph = "-" * 30
+        		payload = {
+        			'chat_id': CHAT_ID,
+        			'text': f"{hyph}\n{' ' * 17}NEW DAY!!!\n{hyph}"
+        		}
+        
+        	try:
+        		response = requests.post(url, data=payload)
+        		response.raise_for_status()
+        	except Exception as e:
+        		pass
+        
+
+    def self.get_day_number(self):
+        	return (time() + 3600) // 86400
 
 
 def app4():
@@ -244,12 +362,16 @@ def app4():
 def main_loop():
     while not stop_event.is_set():
         Aave().aave_main()
+        
         if stop_event.is_set(): break
         Btc().btc_main()
+        
         if stop_event.is_set(): break
-        app3()
+        Btc_ngn().btc_ngn_main()
+        
         if stop_event.is_set(): break
         app4()
+        
         if stop_event.is_set(): break
         print("Loop cycle complete. Restarting...\n")
         sleep(1)
