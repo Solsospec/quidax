@@ -21,14 +21,108 @@ def listen_for_stop():
 
 
 # Simulations
-def app1():
-    print("App 1 starting...")
-    while not stop_event.is_set():
-        print("App 1 working...")
-        sleep(1)
-        break  # Break after one iteration
-    print("App 1 done.")
-
+class Aave:
+    def __init__():
+        pass # Placeholder
+        
+    def aave_main(self):
+        	count = counter = 1
+        	
+        	sell = 307.4467
+        	buy = 306.2193
+        	
+        	step = 0.00005
+        	
+        	calc = (1 / math.pow(0.999, 2)) * (math.sqrt(sell / buy))
+        	
+        	fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
+        
+        	coin = "AAVE"
+        	last_day = self.get_day_number()
+        	
+        	while True:
+        		state = "   YES!" if count > 1 else ""
+        		print(f"Running... {counter}{state}")
+        		
+        		current_day = self.get_day_number()
+        		if current_day > last_day:
+        			count = 1
+        			counter = 0
+        			self.bot()
+        			last_day = current_day
+        
+        		try:
+        			c_1 = self.coinbase(coin)
+        			q = self.qdx(coin)
+        			c_2 = self.coinbase(coin)
+        			
+        			c = c_1 - c_2
+        			diff = c_2 - q
+        			c_q = c_2 / q
+        			thresh = c_2 * 0.0005 
+        			gain = c_q / fees
+        			
+        			counter += 1
+        		
+        			if c < thresh and gain > 1:
+        				self.bot(count, diff, rec(), c_2, q, gain)
+        				count += 1
+        		
+        		except Exception as e:
+        			print(f"\nAn error occurred: {e}\n")
+        			counter = 1 if not counter else counter
+        
+    
+    def coinbase(self, coin):
+        	url = f"https://api.coinbase.com/v2/prices/{coin}-USDT/spot"
+        	response = requests.get(url, timeout=0.3)
+        	data = response.json()["data"]["amount"]
+        	price = float(data)
+        	return price
+        
+    
+    def qdx(self, coin):
+        	url = f"https://www.quidax.com/api/v1/markets/{coin.lower()}usdt/order_book"
+        	response = requests.get(url, timeout=0.5)
+        	order = response.json()["data"]["asks"][0]["price"]
+        	return float(order)
+        
+    
+    def rec(self):
+        	current_time = datetime.datetime.now(pytz.timezone('Africa/Lagos')).strftime('%Y-%m-%d %H:%M:%S')
+        	return current_time
+        	
+        	
+    def bot(self, *args):
+        	BOT_TOKEN = '7553627722:AAHmqifeMpb1zdAe2tnFB7PO2YKJEk_IVJE'
+        	CHAT_ID = '1090646144'
+        
+        	url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+        	
+        	if args:
+        		count, diff, period, cbs, q, gain = args
+        		payload = {
+        			'chat_id': CHAT_ID,
+        			'text': f"📢 PRICE ALERT!\n\nOccurrences: {count}\nPrice difference: {diff}\nPeriod: {period}\nCoinbase price: {cbs}\nQuidax price: {q}\nGain: {gain}"
+        		}
+        		
+        	else:
+        		hyph = "-" * 30
+        		payload = {
+        			'chat_id': CHAT_ID,
+        			'text': f"{hyph}\n{' ' * 17}NEW DAY!!!\n{hyph}"
+        		}
+        
+        	try:
+        		response = requests.post(url, data=payload)
+        		response.raise_for_status()
+        	except Exception:
+        		pass
+        
+        
+    def get_day_number(self):
+        	return (time() + 3600) // 86400
+    
 
 def app2():
     print("App 2 starting...")
@@ -60,7 +154,7 @@ def app4():
 # Main controller
 def main_loop():
     while not stop_event.is_set():
-        app1()
+        Aave().aave_main()
         if stop_event.is_set(): break
         app2()
         if stop_event.is_set(): break
