@@ -38,7 +38,6 @@ class Aave:
         
         coin = "AAVE"
         
-        global last_day
         last_day = self.get_day_number()
         
         while True:
@@ -145,7 +144,6 @@ class Btc:
         
         coin = "BTC"
         
-        global last_day
         last_day = self.get_day_number()
         
         while True:
@@ -257,7 +255,6 @@ class Btc_ngn:
         
         coin = "BTC"
         
-        global last_day
         last_day = self.get_day_number()
         
         while True:
@@ -380,7 +377,6 @@ class Sol:
         
         coin = "SOL"
         
-        global last_day
         last_day = self.get_day_number()
         
         while True:
