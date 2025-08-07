@@ -37,6 +37,8 @@ class Aave:
         fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
         
         coin = "AAVE"
+        
+        global last_day
         last_day = self.get_day_number()
         
         while True:
@@ -142,6 +144,8 @@ class Btc:
         fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
         
         coin = "BTC"
+        
+        global last_day
         last_day = self.get_day_number()
         
         while True:
@@ -252,6 +256,8 @@ class Btc_ngn:
         fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
         
         coin = "BTC"
+        
+        global last_day
         last_day = self.get_day_number()
         
         while True:
@@ -373,6 +379,8 @@ class Sol:
         fees = round(calc if round(calc / step) * step == calc else math.ceil(calc / step) * step, 5)
         
         coin = "SOL"
+        
+        global last_day
         last_day = self.get_day_number()
         
         while True:
